@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html ng-app="map-chat">
+    <head>
+        <link rel="stylesheet" href="app/styles/stylesheet.css"/>
+    </head>
+    <body>
+
+        <div class="angular-google-map-container" ng-controller="HomeController">
+            <ui-gmap-google-map center='map.center' zoom='map.zoom'></ui-gmap-google-map>
+        </div>
+
+        <script src="app/bower_components/angular/angular.min.js"></script>
+        <script src='app/bower_components/lodash/lodash.min.js'></script>
+        <script src='app/bower_components/angular-simple-logger/dist/angular-simple-logger.min.js'></script>
+        <script src='app/bower_components/angular-google-maps/dist/angular-google-maps.min.js'></script>
+        <script src='//maps.googleapis.com/maps/api/js?sensor=false'></script>
+
+        <!-- Main -->
+        <script src="app/app.js"></script>
+
+        <!-- Controllers -->
+        <script src="app/pages/home/home_controller.js"></script>
+    </body>
+</html>
