@@ -1,15 +1,51 @@
 <!DOCTYPE html>
 <html ng-app="map-chat">
     <head>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <link rel="stylesheet" href="app/styles/stylesheet.css"/>
     </head>
     <body>
 
-        <div class="angular-google-map-container" ng-controller="HomeController">
-            <ui-gmap-google-map center='map.center' zoom='map.zoom'></ui-gmap-google-map>
+        <div class="container-fluid">
+
+            <!-- Navbar -->
+            <div class="row">
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <a class="navbar-brand" href="#">
+                                <img alt="Brand" src="http://www.cypruscompany.net/images/google-maps.png">
+                            </a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+
+            <!-- Chat -->
+            <div class="row">
+                <div>
+                    <textarea class="form-control" name="" id="" cols="30" rows="10"></textarea>
+                </div>
+                <form class="form-inline">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="chatComment" placeholder="Just say something...">
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+            </div>
+
+            <!-- Map -->
+            <div class="row">
+                <div class="angular-google-map-container" ng-controller="HomeController">
+                    <ui-gmap-google-map center='map.center' zoom='map.zoom'></ui-gmap-google-map>
+                </div>
+            </div>
         </div>
 
+        <!-- Dependencies -->
         <script src="app/bower_components/angular/angular.min.js"></script>
+        <script src="app/bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
         <script src='app/bower_components/lodash/lodash.min.js'></script>
         <script src='app/bower_components/angular-simple-logger/dist/angular-simple-logger.min.js'></script>
         <script src='app/bower_components/angular-google-maps/dist/angular-google-maps.min.js'></script>

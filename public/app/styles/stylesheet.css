@@ -5,4 +5,5 @@ html, body, div, ul, li {
 
 .angular-google-map-container {
     height: 480px;
+    min-height: 100%;
 }
