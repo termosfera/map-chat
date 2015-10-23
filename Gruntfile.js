@@ -8,21 +8,21 @@ module.exports = function(grunt) {
 
     grunt.initConfig({
         root: {
-            app: './public/app'
+            app: 'public/app'
         },
         less: {
             dev: {
                 options: {
-                    paths: ["<%= root.app %>/assets/less/"]
+                    paths: ["<%= root.app %>/styles"]
                 },
                 files: {
-                    "./public/app/assets/styles/custom.css": "<%= root.app %>/assets/less/custom.less"
+                    "<%= root.app %>/styles/css/stylesheet.css": "<%= root.app %>/styles/less/stylesheet.less"
                 }
             }
         },
         watch: {
             css: {
-                files: ['<%= root.app %>/assets/less/**/*.less'],
+                files: ['<%= root.app %>/styles/less/*.less'],
                 tasks: ['less'],
                 options: {
                     spawn: false
@@ -30,10 +30,6 @@ module.exports = function(grunt) {
             }
         }
     });
-
-    grunt.registerTask('build-dev', [
-        'less'
-    ]);
 
     grunt.registerTask('dev', [
         'watch'

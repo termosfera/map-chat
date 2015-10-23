@@ -3,7 +3,7 @@
     <head>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-        <link rel="stylesheet" href="app/styles/stylesheet.css"/>
+        <link rel="stylesheet" href="app/styles/css/stylesheet.css"/>
     </head>
     <body>
 
@@ -24,14 +24,17 @@
 
             <!-- Chat -->
             <div class="row">
-                <div>
-                    <textarea class="form-control" name="" id="" cols="30" rows="10"></textarea>
+
+                <div class="chat-conversation">
+
                 </div>
-                <form class="form-inline">
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="chatComment" placeholder="Just say something...">
+                <form>
+
+                    <div>
+                        <input type="text" id="chatComment" placeholder="Just say something...">
+                        <button type="submit">Send</button>
                     </div>
-                    <button type="submit" class="btn btn-default">Submit</button>
+
                 </form>
             </div>
 
@@ -41,6 +44,7 @@
                     <ui-gmap-google-map center='map.center' zoom='map.zoom'></ui-gmap-google-map>
                 </div>
             </div>
+
         </div>
 
         <!-- Dependencies -->
@@ -50,11 +54,11 @@
         <script src='app/bower_components/angular-simple-logger/dist/angular-simple-logger.min.js'></script>
         <script src='app/bower_components/angular-google-maps/dist/angular-google-maps.min.js'></script>
         <script src='//maps.googleapis.com/maps/api/js?sensor=false'></script>
-
         <!-- Main -->
         <script src="app/app.js"></script>
-
         <!-- Controllers -->
         <script src="app/pages/home/home_controller.js"></script>
+        <!-- Services -->
+        <script src="app/shared/services/socketFactory.js"></script>
     </body>
 </html>

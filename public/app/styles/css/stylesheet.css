@@ -1,0 +1,52 @@
+html,
+body,
+div,
+ul,
+li {
+  padding: 0;
+  margin: 0;
+}
+html .content,
+body .content,
+div .content,
+ul .content,
+li .content {
+  height: 100%;
+  min-height: 100%;
+}
+html .content .navbar.navbar-default,
+body .content .navbar.navbar-default,
+div .content .navbar.navbar-default,
+ul .content .navbar.navbar-default,
+li .content .navbar.navbar-default {
+  margin: 0;
+  border-radius: 0;
+}
+html .content .chatConversation textarea,
+body .content .chatConversation textarea,
+div .content .chatConversation textarea,
+ul .content .chatConversation textarea,
+li .content .chatConversation textarea {
+  border-radius: 0;
+}
+html .content .form-control,
+body .content .form-control,
+div .content .form-control,
+ul .content .form-control,
+li .content .form-control {
+  border-radius: 0;
+}
+html .content .form-control .btn.btn-default,
+body .content .form-control .btn.btn-default,
+div .content .form-control .btn.btn-default,
+ul .content .form-control .btn.btn-default,
+li .content .form-control .btn.btn-default {
+  border-radius: 0;
+}
+html .content .angular-google-map-container,
+body .content .angular-google-map-container,
+div .content .angular-google-map-container,
+ul .content .angular-google-map-container,
+li .content .angular-google-map-container {
+  height: 480px;
+}

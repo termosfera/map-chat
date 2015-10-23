@@ -1,9 +1,0 @@
-html, body, div, ul, li {
-    padding: 0;
-    margin: 0;
-}
-
-.angular-google-map-container {
-    height: 480px;
-    min-height: 100%;
-}
