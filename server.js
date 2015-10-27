@@ -21,5 +21,11 @@ app.use(bodyParser.json({ type: 'application/vnd.api+json'}));  // parse applica
 
 // Listen
 // -------------------------------------------------------
-app.listen(port);
-console.log('App listening on port ' + port);
+
+var sockets = require('./lib/sockets');
+var http = require('http').Server(app);
+sockets.startSocketServer(http);
+
+http.listen(port, function () {
+    console.log('listening on localhost:' + port);
+});

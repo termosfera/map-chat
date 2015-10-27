@@ -4,17 +4,46 @@
     angular.module("map-chat")
         .controller("HomeController", HomeController);
 
-    HomeController.$inject = ["$scope"];
+    HomeController.$inject = ["SocketFactory"];
 
-    function HomeController($scope) {
+    function HomeController(SocketFactory) {
+        var home = this;
+        home.map = {};
+        home.messageText = "";
+        home.messagesList = [];
 
-        $scope.map = {
-            center: {
-                latitude: 45,
-                longitude: -73
-            },
-            zoom: 8
-        };
+        home.sendMessage = sendMessage;
+
+        activate();
+
+        function activate() {
+            home.map = {
+                center: {
+                    latitude: 45,
+                    longitude: -73
+                },
+                zoom: 8
+            };
+
+            SocketFactory.on("messages", function(message) {
+                console.log(message);
+                if (home.messagesList.length >= 9) {
+                    home.messagesList.shift();
+                }
+                home.messagesList.push(message);
+            });
+        }
+
+        function sendMessage() {
+            var message = {
+                text: home.messageText,
+                time: new Date()
+            };
+
+            home.messageText = "";
+
+            SocketFactory.emit("newMessage", message);
+        }
 
     }
 

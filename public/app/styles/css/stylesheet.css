@@ -6,47 +6,65 @@ li {
   padding: 0;
   margin: 0;
 }
-html .content,
-body .content,
-div .content,
-ul .content,
-li .content {
-  height: 100%;
-  min-height: 100%;
-}
-html .content .navbar.navbar-default,
-body .content .navbar.navbar-default,
-div .content .navbar.navbar-default,
-ul .content .navbar.navbar-default,
-li .content .navbar.navbar-default {
+html .navbar.navbar-default,
+body .navbar.navbar-default,
+div .navbar.navbar-default,
+ul .navbar.navbar-default,
+li .navbar.navbar-default {
   margin: 0;
   border-radius: 0;
 }
-html .content .chatConversation textarea,
-body .content .chatConversation textarea,
-div .content .chatConversation textarea,
-ul .content .chatConversation textarea,
-li .content .chatConversation textarea {
-  border-radius: 0;
+html #chat-room,
+body #chat-room,
+div #chat-room,
+ul #chat-room,
+li #chat-room {
+  width: 100%;
+  height: 320px;
+  border: 1px solid silver;
+  border-radius: 5px;
+  padding: 15px;
 }
-html .content .form-control,
-body .content .form-control,
-div .content .form-control,
-ul .content .form-control,
-li .content .form-control {
-  border-radius: 0;
+html #chat-room span,
+body #chat-room span,
+div #chat-room span,
+ul #chat-room span,
+li #chat-room span {
+  font-weight: bold;
+  color: #0b97c4;
 }
-html .content .form-control .btn.btn-default,
-body .content .form-control .btn.btn-default,
-div .content .form-control .btn.btn-default,
-ul .content .form-control .btn.btn-default,
-li .content .form-control .btn.btn-default {
-  border-radius: 0;
+html #chat-comment,
+body #chat-comment,
+div #chat-comment,
+ul #chat-comment,
+li #chat-comment {
+  width: 100%;
 }
-html .content .angular-google-map-container,
-body .content .angular-google-map-container,
-div .content .angular-google-map-container,
-ul .content .angular-google-map-container,
-li .content .angular-google-map-container {
+html #chat-comment #chat-comment-input,
+body #chat-comment #chat-comment-input,
+div #chat-comment #chat-comment-input,
+ul #chat-comment #chat-comment-input,
+li #chat-comment #chat-comment-input {
+  width: 84%;
+  height: 50px;
+  font-size: 25px;
+  border: none;
+  box-shadow: none;
+}
+html #chat-comment button,
+body #chat-comment button,
+div #chat-comment button,
+ul #chat-comment button,
+li #chat-comment button {
+  width: 15%;
+  height: 50px;
+  border: none;
+  padding: 0;
+}
+html .angular-google-map-container,
+body .angular-google-map-container,
+div .angular-google-map-container,
+ul .angular-google-map-container,
+li .angular-google-map-container {
   height: 480px;
 }
