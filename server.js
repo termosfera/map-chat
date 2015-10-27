@@ -8,7 +8,8 @@ var app             = express();
 
 // Logging and Parsing
 app.use(express.static(__dirname + '/public'));                 // sets the static files location to public
-app.use('/bower_components',  express.static(__dirname + '/bower_components')); // Use BowerComponents
+app.use('/bower_components',
+    express.static(__dirname + '/bower_components'));           // Use BowerComponents
 app.use(morgan('dev'));                                         // log with Morgan
 app.use(bodyParser.json());                                     // parse application/json
 app.use(bodyParser.urlencoded({extended: true}));               // parse application/x-www-form-urlencoded
@@ -21,7 +22,6 @@ app.use(bodyParser.json({ type: 'application/vnd.api+json'}));  // parse applica
 
 // Listen
 // -------------------------------------------------------
-
 var sockets = require('./lib/sockets');
 var http = require('http').Server(app);
 sockets.startSocketServer(http);
