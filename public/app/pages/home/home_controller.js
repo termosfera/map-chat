@@ -4,10 +4,16 @@
     angular.module("map-chat")
         .controller("HomeController", HomeController);
 
-    HomeController.$inject = ["SocketFactory"];
+    HomeController.$inject = ["SocketFactory", "geolocation"];
 
-    function HomeController(SocketFactory) {
+    function HomeController(SocketFactory, geolocation) {
         var home = this;
+        home.user = {
+            location: {
+                latitude: 0,
+                longitude: 0
+            }
+        };
         home.map = {};
         home.messageText = "";
         home.messagesList = [];
@@ -24,6 +30,14 @@
                 },
                 zoom: 8
             };
+
+            geolocation.getLocation().then(function(data) {
+                if (data) {
+                    home.user.location.latitude = data.coords.latitude;
+                    home.user.location.longitude = data.coords.longitude;
+                    SocketFactory.emit("userConnected", home.user);
+                }
+            });
 
             SocketFactory.on("messages", function(message) {
                 console.log(message);
