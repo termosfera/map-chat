@@ -7,6 +7,7 @@
     HomeController.$inject = ["SocketFactory", "geolocation"];
 
     function HomeController(SocketFactory, geolocation) {
+        // Attributes
         var home = this;
         var randomValue = Math.floor(Math.random() * 100);
         home.user = {
@@ -28,19 +29,29 @@
         home.messagesList = [];
         home.usersLocationsList = [];
 
+        // Public functions
         home.sendMessage = sendMessage;
 
         activate();
 
         function activate() {
-            getGeolocation();
+            handleNewUserConnection();
             handleMessages();
             handleUsers();
         }
 
+        function handleNewUserConnection() {
+            geolocation.getLocation().then(function(data) {
+                if (data) {
+                    home.user.location.latitude = data.coords.latitude;
+                    home.user.location.longitude = data.coords.longitude;
+                    SocketFactory.emit("userConnected", home.user);
+                }
+            });
+        }
+
         function handleMessages() {
             SocketFactory.on("messages", function(message) {
-                console.log(message);
                 if (home.messagesList.length >= 9) {
                     home.messagesList.shift();
                 }
@@ -51,18 +62,7 @@
         function handleUsers() {
             SocketFactory.on("users", function(user) {
                 if (user) {
-                    console.log(user.location);
                     home.usersLocationsList.push(user.location);
-                }
-            });
-        }
-
-        function getGeolocation() {
-            geolocation.getLocation().then(function(data) {
-                if (data) {
-                    home.user.location.latitude = data.coords.latitude;
-                    home.user.location.longitude = data.coords.longitude;
-                    SocketFactory.emit("userConnected", home.user);
                 }
             });
         }
@@ -72,9 +72,7 @@
                 text: home.messageText,
                 time: new Date()
             };
-
             home.messageText = "";
-
             SocketFactory.emit("newMessage", message);
         }
 
