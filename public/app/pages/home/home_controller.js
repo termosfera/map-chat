@@ -60,10 +60,15 @@
         }
 
         function handleUsers() {
-            SocketFactory.on("users", function(user) {
-                if (user) {
-                    home.usersLocationsList.push(user.location);
-                }
+            //SocketFactory.on("users", function(user) {
+            //    if (user) {
+            //        home.usersLocationsList.push(user.location);
+            //    }
+            //});
+
+            SocketFactory.on("usersLocations", function(usersLocations) {
+                home.usersLocationsList = usersLocations;
+                console.log(home.usersLocationsList);
             });
         }
 
