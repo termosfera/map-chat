@@ -23,7 +23,7 @@
                 latitude: 38,
                 longitude: -1.9
             },
-            zoom: 8
+            zoom: 9
         };
         home.messageText = "";
         home.messagesList = [];
@@ -61,7 +61,7 @@
 
         function handleUsers() {
             SocketFactory.on("users", function(users) {
-                var usersLocations = []
+                var usersLocations = [];
                 for (var i = 0; i < users.length; i++) {
                     usersLocations.push(users[i].location);
                 }
