@@ -22,6 +22,7 @@
     "angular-google-maps": "~2.2.1",
     "angular-bootstrap": "~0.14.2",
     "angularjs-geolocation": "~0.1.1",
-    "oauth-js": "~0.4.4"
+    "oauth-js": "~0.4.4",
+    "angular-ui-router": "~0.2.15"
   }
 }

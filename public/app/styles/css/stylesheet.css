@@ -7,6 +7,7 @@ li {
   margin: 0;
   /* Chat comments pool */
   /* chat comments form */
+  /* Login screen */
 }
 html .navbar.navbar-default,
 body .navbar.navbar-default,
@@ -49,6 +50,7 @@ li #chat-comment #chat-comment-input {
   width: 84%;
   height: 50px;
   font-size: 25px;
+  padding-left: 10px;
   border: none;
   box-shadow: none;
 }
@@ -68,4 +70,22 @@ div .angular-google-map-container,
 ul .angular-google-map-container,
 li .angular-google-map-container {
   height: 480px;
+}
+html #login-container,
+body #login-container,
+div #login-container,
+ul #login-container,
+li #login-container {
+  width: 100%;
+  min-height: 100%;
+}
+html #login-container #twitter-login-button,
+body #login-container #twitter-login-button,
+div #login-container #twitter-login-button,
+ul #login-container #twitter-login-button,
+li #login-container #twitter-login-button {
+  display: block;
+  margin-top: 45%;
+  margin-right: auto;
+  margin-left: auto;
 }
