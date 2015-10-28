@@ -28,12 +28,7 @@
                 .then(function() {
                     OauthFactory.isReady().me().done(function(me) {
                         if (me) {
-                            user.alias = me.alias;
-                            user.isLogged = true;
-                            user.location.id = me.id;
-                            user.location.icon = me.avatar;
-                            localStorage.setItem("map-chat.user.isLogged", JSON.stringify(user.isLogged));
-                            console.log(user);
+                            UserFactory.setUser(me);
                             $state.go("home");
                         }
                     });

@@ -22,7 +22,11 @@
             };
 
             function setUser(u) {
-                user = u;
+                user.alias = u.alias;
+                user.isLogged = true;
+                user.location.id = u.id;
+                user.location.icon = u.avatar;
+                localStorage.setItem("map-chat.user.isLogged", JSON.stringify(user.isLogged));
             }
 
             function getUser() {
