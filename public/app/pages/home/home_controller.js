@@ -24,12 +24,14 @@
 
         // Public functions
         home.sendMessage = sendMessage;
+        home.logout = logout;
 
         activate();
 
         function activate() {
             // Check if user is logged, if not redirect to login
-            if (!home.user.isLogged) {
+            var isLogged = JSON.parse( localStorage.getItem("map-chat.user.isLogged") );
+            if (!isLogged) {
                 $state.go("login");
             }
 
@@ -71,11 +73,16 @@
 
         function sendMessage() {
             var message = {
+                author: home.user.alias,
                 text: home.messageText,
                 time: new Date()
             };
             home.messageText = "";
             SocketFactory.emit("newMessage", message);
+        }
+
+        function logout() {
+            localStorage.setItem("map-chat.user.isLogged", false);
         }
 
     }

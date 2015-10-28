@@ -15,6 +15,10 @@
         activate();
 
         function activate() {
+            var isLogged = JSON.parse( localStorage.getItem("map-chat.user.isLogged") );
+            if (isLogged) {
+                $state.go("home");
+            }
             user = UserFactory.getUser();
             OauthFactory.initialize();
         }
@@ -28,7 +32,8 @@
                             user.isLogged = true;
                             user.location.id = me.id;
                             user.location.icon = me.avatar;
-                            console.log(user.id);
+                            localStorage.setItem("map-chat.user.isLogged", JSON.stringify(user.isLogged));
+                            console.log(user);
                             $state.go("home");
                         }
                     });
