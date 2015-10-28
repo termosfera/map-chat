@@ -1,4 +1,4 @@
-(function() {
+(function () {
     "use strict";
 
     angular.module("map-chat")
@@ -13,8 +13,8 @@
         home.user = UserFactory.getUser();
         home.map = {
             center: {
-                latitude: 38,
-                longitude: -1.9
+                latitude: home.user.location.latitude,
+                longitude: home.user.location.longitude
             },
             zoom: 9
         };
@@ -30,7 +30,7 @@
 
         function activate() {
             // Check if user is logged, if not redirect to login
-            var isLogged = JSON.parse( localStorage.getItem("map-chat.user.isLogged") );
+            var isLogged = JSON.parse(localStorage.getItem("map-chat.user.isLogged"));
             if (!isLogged) {
                 $state.go("login");
             }
@@ -41,18 +41,17 @@
         }
 
         function handleNewUserConnection() {
-            geolocation.getLocation().then(function(data) {
+            geolocation.getLocation().then(function (data) {
                 if (data) {
                     home.user.location.latitude = data.coords.latitude;
                     home.user.location.longitude = data.coords.longitude;
-                    console.log(home.user);
                     SocketFactory.emit("userConnected", home.user);
                 }
             });
         }
 
         function handleMessages() {
-            SocketFactory.on("messages", function(message) {
+            SocketFactory.on("messages", function (message) {
                 if (home.messagesList.length >= 9) {
                     home.messagesList.shift();
                 }
@@ -61,13 +60,12 @@
         }
 
         function handleUsers() {
-            SocketFactory.on("users", function(users) {
+            SocketFactory.on("users", function (users) {
                 var usersLocations = [];
                 for (var i = 0; i < users.length; i++) {
                     usersLocations.push(users[i].location);
                 }
                 home.usersLocationsList = usersLocations;
-                console.log(home.usersLocationsList);
             });
         }
 
@@ -83,6 +81,7 @@
 
         function logout() {
             localStorage.setItem("map-chat.user.isLogged", false);
+            $state.go("login");
         }
 
     }
