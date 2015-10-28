@@ -4,20 +4,13 @@
     angular.module("map-chat")
         .controller("HomeController", HomeController);
 
-    HomeController.$inject = ["SocketFactory", "geolocation"];
+    HomeController.$inject = ["SocketFactory", "geolocation", "UserFactory", "$state"];
 
-    function HomeController(SocketFactory, geolocation) {
+    function HomeController(SocketFactory, geolocation, UserFactory, $state) {
+
         // Attributes
         var home = this;
-        var randomValue = Math.floor(Math.random() * 100);
-        home.user = {
-            location: {
-                id: randomValue,
-                title: "m" + randomValue,
-                latitude: 0,
-                longitude: 0
-            }
-        };
+        home.user = UserFactory.getUser();
         home.map = {
             center: {
                 latitude: 38,
@@ -35,6 +28,11 @@
         activate();
 
         function activate() {
+            // Check if user is logged, if not redirect to login
+            if (!home.user.isLogged) {
+                $state.go("login");
+            }
+
             handleNewUserConnection();
             handleMessages();
             handleUsers();
@@ -45,6 +43,7 @@
                 if (data) {
                     home.user.location.latitude = data.coords.latitude;
                     home.user.location.longitude = data.coords.longitude;
+                    console.log(home.user);
                     SocketFactory.emit("userConnected", home.user);
                 }
             });

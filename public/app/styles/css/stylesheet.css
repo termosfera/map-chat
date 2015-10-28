@@ -71,6 +71,13 @@ ul .angular-google-map-container,
 li .angular-google-map-container {
   height: 480px;
 }
+html .angular-google-map-container .gmap-marker,
+body .angular-google-map-container .gmap-marker,
+div .angular-google-map-container .gmap-marker,
+ul .angular-google-map-container .gmap-marker,
+li .angular-google-map-container .gmap-marker {
+  border-radius: 50%;
+}
 html #login-container,
 body #login-container,
 div #login-container,
