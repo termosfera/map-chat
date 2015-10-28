@@ -8,18 +8,16 @@
 
     function LoginController(OauthFactory, UserFactory, $state) {
         var login = this;
-        var user;
 
         login.connect = connect;
 
         activate();
 
         function activate() {
-            var isLogged = JSON.parse( localStorage.getItem("map-chat.user.isLogged") );
-            if (isLogged) {
-                $state.go("home");
+            var storedUser = JSON.parse( localStorage.getItem("map-chat.user") );
+            if (storedUser && storedUser.isLogged) {
+                return $state.go("home");
             }
-            user = UserFactory.getUser();
             OauthFactory.initialize();
         }
 
@@ -29,6 +27,8 @@
                     OauthFactory.isReady().me().done(function(me) {
                         if (me) {
                             UserFactory.setUser(me);
+                            var user = UserFactory.getUser();
+                            UserFactory.storeUser(user);
                             $state.go("home");
                         }
                     });
