@@ -1,27 +1,20 @@
-(function() {
+(function () {
     "use strict";
 
     angular.module("map-chat")
         .controller("HomeController", HomeController);
 
-    HomeController.$inject = ["SocketFactory", "geolocation"];
+    HomeController.$inject = ["SocketFactory", "geolocation", "UserFactory", "$state"];
 
-    function HomeController(SocketFactory, geolocation) {
+    function HomeController(SocketFactory, geolocation, UserFactory, $state) {
+
         // Attributes
         var home = this;
-        var randomValue = Math.floor(Math.random() * 100);
-        home.user = {
-            location: {
-                id: randomValue,
-                title: "m" + randomValue,
-                latitude: 0,
-                longitude: 0
-            }
-        };
+        home.user = UserFactory.getUser();
         home.map = {
             center: {
-                latitude: 38,
-                longitude: -1.9
+                latitude: home.user.location.latitude,
+                longitude: home.user.location.longitude
             },
             zoom: 9
         };
@@ -31,17 +24,24 @@
 
         // Public functions
         home.sendMessage = sendMessage;
+        home.logout = logout;
 
         activate();
 
         function activate() {
+            // Check if user is logged, if not redirect to login
+            var isLogged = JSON.parse(localStorage.getItem("map-chat.user.isLogged"));
+            if (!isLogged) {
+                $state.go("login");
+            }
+
             handleNewUserConnection();
             handleMessages();
             handleUsers();
         }
 
         function handleNewUserConnection() {
-            geolocation.getLocation().then(function(data) {
+            geolocation.getLocation().then(function (data) {
                 if (data) {
                     home.user.location.latitude = data.coords.latitude;
                     home.user.location.longitude = data.coords.longitude;
@@ -51,7 +51,7 @@
         }
 
         function handleMessages() {
-            SocketFactory.on("messages", function(message) {
+            SocketFactory.on("messages", function (message) {
                 if (home.messagesList.length >= 9) {
                     home.messagesList.shift();
                 }
@@ -60,23 +60,28 @@
         }
 
         function handleUsers() {
-            SocketFactory.on("users", function(users) {
+            SocketFactory.on("users", function (users) {
                 var usersLocations = [];
                 for (var i = 0; i < users.length; i++) {
                     usersLocations.push(users[i].location);
                 }
                 home.usersLocationsList = usersLocations;
-                console.log(home.usersLocationsList);
             });
         }
 
         function sendMessage() {
             var message = {
+                author: home.user.alias,
                 text: home.messageText,
                 time: new Date()
             };
             home.messageText = "";
             SocketFactory.emit("newMessage", message);
+        }
+
+        function logout() {
+            localStorage.setItem("map-chat.user.isLogged", false);
+            $state.go("login");
         }
 
     }
