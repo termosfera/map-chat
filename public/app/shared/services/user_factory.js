@@ -4,6 +4,7 @@
     angular.module("map-chat")
         .factory("UserFactory", ["geolocation", function(geolocation) {
 
+            // User model
             var user = {
                 isLogged: false,
                 alias: "",
@@ -17,38 +18,40 @@
             };
 
             return {
-                setUser: setUser,
-                getUser: getUser,
                 storeUser: storeUser,
-                retrieveUser: retrieveUser
+                getUser: getUser
             };
 
-            function setUser(u) {
+            /**
+             *
+             * @param me
+             * @returns {*}
+             * @description
+             *
+             * Set the user model and store it to the localstorage
+             */
+            function storeUser(me) {
 
-                geolocation.getLocation().then(function (data) {
-                    user.alias = u.alias;
-                    user.isLogged = true;
-                    user.location.id = u.id;
-                    user.location.icon = u.avatar;
-
-                    if (data) {
+                return geolocation.getLocation()
+                    .then(function (data) {
+                        user.alias = me.alias;
+                        user.isLogged = true;
+                        user.location.id = me.id;
+                        user.location.icon = me.avatar;
                         user.location.latitude = data.coords.latitude;
                         user.location.longitude = data.coords.longitude;
-                    }
-                }).then(function() {
-                    storeUser(user);
+
+                        localStorage.setItem("map-chat.user", JSON.stringify(user));
                 });
+
             }
 
+            /**
+             * @description
+             *
+             * Retrieve a user stored in the local storage
+             */
             function getUser() {
-                return user;
-            }
-
-            function storeUser(user) {
-                localStorage.setItem("map-chat.user", JSON.stringify(user));
-            }
-
-            function retrieveUser() {
                 return localStorage.getItem("map-chat.user");
             }
 

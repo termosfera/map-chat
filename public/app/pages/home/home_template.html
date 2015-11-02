@@ -32,9 +32,11 @@
                 <p><span>{{message.author}}: </span>{{message.text}}</p>
             </div>
         </div>
-        <div id="chat-comment">
-            <input id="chat-comment-input" type="text" placeholder="Just say something..." ng-model="home.messageText">
-            <button type="submit">Send</button>
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search for..." ng-model="home.messageText">
+        <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Send Message</button>
+        </span>
         </div>
     </form>
 

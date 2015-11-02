@@ -5,6 +5,7 @@ ul,
 li {
   padding: 0;
   margin: 0;
+  /* Home screen */
   /* Chat comments pool */
   /* chat comments form */
   /* Login screen */
@@ -42,40 +43,18 @@ ul #chat-comment,
 li #chat-comment {
   width: 100%;
 }
-html #chat-comment #chat-comment-input,
-body #chat-comment #chat-comment-input,
-div #chat-comment #chat-comment-input,
-ul #chat-comment #chat-comment-input,
-li #chat-comment #chat-comment-input {
-  width: 84%;
-  height: 50px;
-  font-size: 25px;
-  padding-left: 10px;
-  border: none;
-  box-shadow: none;
-}
-html #chat-comment button,
-body #chat-comment button,
-div #chat-comment button,
-ul #chat-comment button,
-li #chat-comment button {
-  width: 15%;
-  height: 50px;
-  border: none;
-  padding: 0;
-}
 html .angular-google-map-container,
 body .angular-google-map-container,
 div .angular-google-map-container,
 ul .angular-google-map-container,
 li .angular-google-map-container {
-  height: 480px;
+  height: 300px;
 }
-html .angular-google-map-container .gmap-marker,
-body .angular-google-map-container .gmap-marker,
-div .angular-google-map-container .gmap-marker,
-ul .angular-google-map-container .gmap-marker,
-li .angular-google-map-container .gmap-marker {
+html .angular-google-map-container .gmap-marker.angular-google-map-markers,
+body .angular-google-map-container .gmap-marker.angular-google-map-markers,
+div .angular-google-map-container .gmap-marker.angular-google-map-markers,
+ul .angular-google-map-container .gmap-marker.angular-google-map-markers,
+li .angular-google-map-container .gmap-marker.angular-google-map-markers {
   border-radius: 50%;
 }
 html #login-container,

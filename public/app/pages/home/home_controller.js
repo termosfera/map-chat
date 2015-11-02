@@ -4,7 +4,7 @@
     angular.module("map-chat")
         .controller("HomeController", HomeController);
 
-    HomeController.$inject = ["SocketFactory", "geolocation", "UserFactory", "$state"];
+    HomeController.$inject = ["SocketFactory", "UserFactory", "$state"];
 
     function HomeController(SocketFactory, UserFactory, $state) {
 
@@ -23,21 +23,19 @@
 
         function activate() {
             // Check if user is logged, if not redirect to login
-            var storedUser = JSON.parse( UserFactory.retrieveUser() );
-            if (!storedUser || !storedUser.isLogged) {
+            home.user = JSON.parse(UserFactory.getUser());
+            if (!home.user || !home.user.isLogged) {
                 return $state.go("login");
             }
 
-            // If the user is logged we have data to retrieve
-            home.user = storedUser;
+            // Emit that a new user is connected...
+            SocketFactory.emit("userConnected", home.user);
 
             // Set initial map position
-            var initialLatitude = home.user.location.latitude || 0;
-            var initialLongitude = home.user.location.longitude || 0;
             home.map = {
                 center: {
-                    latitude: initialLatitude,
-                    longitude: initialLongitude
+                    latitude: home.user.location.latitude || 0,
+                    longitude: home.user.location.longitude || 0
                 },
                 zoom: 9
             };
@@ -77,7 +75,7 @@
 
         function logout() {
             localStorage.removeItem("map-chat.user");
-            $state.go("login");
+            return $state.go("login");
         }
 
     }
