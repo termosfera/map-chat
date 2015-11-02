@@ -28,13 +28,22 @@ li #chat-room {
   border: 1px solid silver;
   padding: 15px;
 }
+@media (max-width: 400px) {
+  html #chat-room,
+  body #chat-room,
+  div #chat-room,
+  ul #chat-room,
+  li #chat-room {
+    height: 200px;
+  }
+}
 html #chat-room span,
 body #chat-room span,
 div #chat-room span,
 ul #chat-room span,
 li #chat-room span {
   font-weight: bold;
-  color: #0b97c4;
+  color: orange;
 }
 html #chat-comment,
 body #chat-comment,
@@ -42,6 +51,14 @@ div #chat-comment,
 ul #chat-comment,
 li #chat-comment {
   width: 100%;
+}
+html .form-control-focus:focus,
+body .form-control-focus:focus,
+div .form-control-focus:focus,
+ul .form-control-focus:focus,
+li .form-control-focus:focus {
+  border-color: orange;
+  outline: 0;
 }
 html .angular-google-map-container,
 body .angular-google-map-container,

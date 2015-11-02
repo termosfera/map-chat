@@ -15,16 +15,24 @@ html, body, div, ul, li {
     border: 1px solid silver;
     padding: 15px;
 
+    @media (max-width: 400px) {
+      height: 200px;
+    }
+
     span {
       font-weight: bold;
-      color: #0b97c4;
+      color: orange;
     }
   }
 
   /* chat comments form */
   #chat-comment {
     width: 100%;
+  }
 
+  .form-control-focus:focus {
+    border-color: orange;
+    outline: 0;
   }
 
   .angular-google-map-container {
