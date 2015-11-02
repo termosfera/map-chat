@@ -5,13 +5,13 @@ learn how to integrate Google services with Angular.js app
 
 ### Instalation
 
-[Clone repository](https://github.com/termosfera/map-chat.git)
-Run:
+ - [Clone repository](https://github.com/termosfera/map-chat.git)
+ - Run:
 ```
 npm install
 bower install
 ```
-Run:
+ - Run:
 ```
 node server.js
 ```
