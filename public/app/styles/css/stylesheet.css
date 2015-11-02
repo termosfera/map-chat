@@ -1,3 +1,6 @@
+html {
+  background-color: whitesmoke;
+}
 html,
 body,
 div,
@@ -5,88 +8,43 @@ ul,
 li {
   padding: 0;
   margin: 0;
+}
+#map-chat-container {
+  background-color: whitesmoke;
   /* Home screen */
   /* Chat comments pool */
   /* chat comments form */
   /* Login screen */
 }
-html .navbar.navbar-default,
-body .navbar.navbar-default,
-div .navbar.navbar-default,
-ul .navbar.navbar-default,
-li .navbar.navbar-default {
+#map-chat-container .navbar.navbar-default {
   margin: 0;
   border-radius: 0;
 }
-html #chat-room,
-body #chat-room,
-div #chat-room,
-ul #chat-room,
-li #chat-room {
+#map-chat-container #chat-room {
   width: 100%;
-  height: 320px;
+  height: 200px;
   border: 1px solid silver;
   padding: 15px;
+  background-color: white;
 }
-@media (max-width: 400px) {
-  html #chat-room,
-  body #chat-room,
-  div #chat-room,
-  ul #chat-room,
-  li #chat-room {
-    height: 200px;
-  }
-}
-html #chat-room span,
-body #chat-room span,
-div #chat-room span,
-ul #chat-room span,
-li #chat-room span {
+#map-chat-container #chat-room span {
   font-weight: bold;
   color: orange;
 }
-html #chat-comment,
-body #chat-comment,
-div #chat-comment,
-ul #chat-comment,
-li #chat-comment {
+#map-chat-container #chat-comment {
   width: 100%;
 }
-html .form-control-focus:focus,
-body .form-control-focus:focus,
-div .form-control-focus:focus,
-ul .form-control-focus:focus,
-li .form-control-focus:focus {
-  border-color: orange;
-  outline: 0;
-}
-html .angular-google-map-container,
-body .angular-google-map-container,
-div .angular-google-map-container,
-ul .angular-google-map-container,
-li .angular-google-map-container {
+#map-chat-container .angular-google-map-container {
   height: 250px;
 }
-html .angular-google-map-container .gmap-marker.angular-google-map-markers,
-body .angular-google-map-container .gmap-marker.angular-google-map-markers,
-div .angular-google-map-container .gmap-marker.angular-google-map-markers,
-ul .angular-google-map-container .gmap-marker.angular-google-map-markers,
-li .angular-google-map-container .gmap-marker.angular-google-map-markers {
+#map-chat-container .angular-google-map-container .gmap-marker.angular-google-map-markers {
   border-radius: 50%;
 }
-html #login-container,
-body #login-container,
-div #login-container,
-ul #login-container,
-li #login-container {
+#map-chat-container #login-container {
   width: 100%;
   min-height: 100%;
 }
-html #login-container #twitter-login-button,
-body #login-container #twitter-login-button,
-div #login-container #twitter-login-button,
-ul #login-container #twitter-login-button,
-li #login-container #twitter-login-button {
+#map-chat-container #login-container #twitter-login-button {
   display: block;
   margin-top: 100px;
   margin-right: auto;

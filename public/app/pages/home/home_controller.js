@@ -17,10 +17,10 @@
      * Home page Controller
      */
     function HomeController(SocketFactory, UserFactory, $state) {
-
         // Attributes
         var home = this;
         home.user = {};
+        home.map = {};
         home.messageText = "";
         home.messagesList = [];
         home.usersLocationsList = [];
@@ -62,7 +62,7 @@
          */
         function handleMessages() {
             SocketFactory.on("messages", function (message) {
-                if (home.messagesList.length >= 9) {
+                if (home.messagesList.length >= 6) {
                     home.messagesList.shift();
                 }
                 home.messagesList.push(message);

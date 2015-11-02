@@ -10,11 +10,16 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Map Chat</a>
+                <a class="navbar-brand" href="#/home">
+                    <img alt="Brand" src="app/img/google_maps_icon.png">
+                </a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="#/home">Map chat</a></li>
+                </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#" ng-click="home.logout()">Logout</a></li>
                 </ul>
@@ -33,7 +38,7 @@
             </div>
         </div>
         <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search for..." ng-model="home.messageText">
+            <input type="text" class="form-control" placeholder="Write something..." ng-model="home.messageText">
         <span class="input-group-btn">
             <button class="btn btn-default" type="submit">Send Message</button>
         </span>
