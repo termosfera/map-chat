@@ -11,7 +11,7 @@ learn how to integrate Google services with Angular.js app
 npm install
 bower install
 ```
-3. Run server:
+3. Run:
 ```
 node server.js
 ```
