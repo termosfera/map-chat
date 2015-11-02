@@ -6,6 +6,16 @@
 
     HomeController.$inject = ["SocketFactory", "UserFactory", "$state"];
 
+    /**
+     * @ngdoc controller
+     * @name map-chat.controller:HomeController
+     * @param {object} SocketFactory SocketFactory service
+     * @param {object} UserFactory UserFactory service
+     * @param {object} $state $state service
+     * @description
+     *
+     * Home page Controller
+     */
     function HomeController(SocketFactory, UserFactory, $state) {
 
         // Attributes
@@ -21,9 +31,12 @@
 
         activate();
 
+        /**
+         * Initial page logic
+         */
         function activate() {
             // Check if user is logged, if not redirect to login
-            home.user = JSON.parse(UserFactory.getUser());
+            home.user = JSON.parse(UserFactory.retrieveUser());
             if (!home.user || !home.user.isLogged) {
                 return $state.go("login");
             }
@@ -44,6 +57,9 @@
             handleUsers();
         }
 
+        /**
+         * Messages handler
+         */
         function handleMessages() {
             SocketFactory.on("messages", function (message) {
                 if (home.messagesList.length >= 9) {
@@ -53,6 +69,9 @@
             });
         }
 
+        /**
+         * Connected users handler
+         */
         function handleUsers() {
             SocketFactory.on("users", function (users) {
                 var usersLocations = [];
@@ -63,6 +82,15 @@
             });
         }
 
+        /**
+         * @ngdoc function
+         * @name map-chat.controller:HomeController#sendMessage
+         * @methodOf map-chat.controller:HomeController
+         * @public
+         * @description
+         *
+         * Sends message on click
+         */
         function sendMessage() {
             var message = {
                 author: home.user.alias,
@@ -73,6 +101,15 @@
             SocketFactory.emit("newMessage", message);
         }
 
+        /**
+         * @ngdoc function
+         * @name map-chat.controller:HomeController#logout
+         * @methodOf map-chat.controller:HomeController
+         * @public
+         * @description
+         *
+         * Logs out on click
+         */
         function logout() {
             localStorage.removeItem("map-chat.user");
             return $state.go("login");

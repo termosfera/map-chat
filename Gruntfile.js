@@ -2,6 +2,7 @@ var grunt = require("grunt");
 
 grunt.loadNpmTasks('grunt-contrib-less');
 grunt.loadNpmTasks('grunt-contrib-watch');
+grunt.loadNpmTasks('grunt-ngdocs');
 
 module.exports = function(grunt) {
     "use strict";
@@ -28,10 +29,29 @@ module.exports = function(grunt) {
                     spawn: false
                 }
             }
+        },
+        ngdocs: {
+            options: {
+                dest: '<%= root.app %>/docs/',
+                html5Mode: false
+            },
+            api: {
+                src: [
+                    '<%= root.app %>/app.js',
+                    '<%= root.app %>/pages/**/*.js',
+                    '<%= root.app %>/shared/**/*.js'
+                ],
+                title: 'Map-chat client'
+            }
         }
     });
 
+    grunt.registerTask('doc', [
+        'ngdocs'
+    ]);
+
     grunt.registerTask('dev', [
+        'ngdocs',
         'watch'
     ]);
 
