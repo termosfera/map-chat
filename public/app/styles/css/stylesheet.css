@@ -48,7 +48,7 @@ body .angular-google-map-container,
 div .angular-google-map-container,
 ul .angular-google-map-container,
 li .angular-google-map-container {
-  height: 300px;
+  height: 250px;
 }
 html .angular-google-map-container .gmap-marker.angular-google-map-markers,
 body .angular-google-map-container .gmap-marker.angular-google-map-markers,
@@ -71,7 +71,7 @@ div #login-container #twitter-login-button,
 ul #login-container #twitter-login-button,
 li #login-container #twitter-login-button {
   display: block;
-  margin-top: 45%;
+  margin-top: 100px;
   margin-right: auto;
   margin-left: auto;
 }
