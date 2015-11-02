@@ -6,7 +6,17 @@
 
     LoginController.$inject = ["OauthFactory", "UserFactory", "$state", "SocketFactory"];
 
-    function LoginController(OauthFactory, UserFactory, $state, SocketFactory) {
+    /**
+     * @ngdoc controller
+     * @name map-chat.controller:LoginController
+     * @param {object} OauthFactory SocketFactory service
+     * @param {object} UserFactory UserFactory service
+     * @param {object} $state $state service
+     * @description
+     *
+     * Login page Controller
+     */
+    function LoginController(OauthFactory, UserFactory, $state) {
         var login = this;
 
         login.connect = connect;
@@ -14,13 +24,22 @@
         activate();
 
         function activate() {
-            var user = JSON.parse( UserFactory.getUser() );
+            var user = JSON.parse( UserFactory.retrieveUser() );
             if (user && user.isLogged) {
                 return $state.go("home");
             }
             OauthFactory.initialize();
         }
 
+        /**
+         * @ngdoc function
+         * @name map-chat.controller:LoginController#connect
+         * @methodOf map-chat.controller:LoginController
+         * @public
+         * @description
+         *
+         * connects to twitter with oauth service on click
+         */
         function connect() {
 
             // Call to oauth to connect with twitter...
