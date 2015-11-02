@@ -34,7 +34,10 @@
     <form novalidate ng-submit="home.sendMessage()">
         <div id="chat-room">
             <div ng-repeat="message in home.messagesList">
-                <p><span>{{message.author}}: </span>{{message.text}}</p>
+                <p>
+                    <span ng-class="home.user.alias == message.author ? 'owner' : ''">{{message.author}}: </span>
+                    {{message.text}}
+                </p>
             </div>
         </div>
         <div class="input-group">

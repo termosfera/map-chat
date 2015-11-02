@@ -50,3 +50,7 @@ li {
   margin-right: auto;
   margin-left: auto;
 }
+/* Utility classes */
+.owner {
+  color: #E23939 !important;
+}
