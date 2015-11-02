@@ -4,20 +4,13 @@
     angular.module("map-chat")
         .controller("HomeController", HomeController);
 
-    HomeController.$inject = ["SocketFactory", "geolocation", "UserFactory", "$state"];
+    HomeController.$inject = ["SocketFactory", "UserFactory", "$state"];
 
-    function HomeController(SocketFactory, geolocation, UserFactory, $state) {
+    function HomeController(SocketFactory, UserFactory, $state) {
 
         // Attributes
         var home = this;
-        home.user = UserFactory.getUser();
-        home.map = {
-            center: {
-                latitude: home.user.location.latitude,
-                longitude: home.user.location.longitude
-            },
-            zoom: 9
-        };
+        home.user = {};
         home.messageText = "";
         home.messagesList = [];
         home.usersLocationsList = [];
@@ -30,24 +23,25 @@
 
         function activate() {
             // Check if user is logged, if not redirect to login
-            var isLogged = JSON.parse(localStorage.getItem("map-chat.user.isLogged"));
-            if (!isLogged) {
-                $state.go("login");
+            home.user = JSON.parse(UserFactory.getUser());
+            if (!home.user || !home.user.isLogged) {
+                return $state.go("login");
             }
 
-            handleNewUserConnection();
+            // Emit that a new user is connected...
+            SocketFactory.emit("userConnected", home.user);
+
+            // Set initial map position
+            home.map = {
+                center: {
+                    latitude: home.user.location.latitude || 0,
+                    longitude: home.user.location.longitude || 0
+                },
+                zoom: 9
+            };
+
             handleMessages();
             handleUsers();
-        }
-
-        function handleNewUserConnection() {
-            geolocation.getLocation().then(function (data) {
-                if (data) {
-                    home.user.location.latitude = data.coords.latitude;
-                    home.user.location.longitude = data.coords.longitude;
-                    SocketFactory.emit("userConnected", home.user);
-                }
-            });
         }
 
         function handleMessages() {
@@ -80,8 +74,8 @@
         }
 
         function logout() {
-            localStorage.setItem("map-chat.user.isLogged", false);
-            $state.go("login");
+            localStorage.removeItem("map-chat.user");
+            return $state.go("login");
         }
 
     }

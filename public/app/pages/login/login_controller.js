@@ -4,42 +4,43 @@
     angular.module("map-chat")
         .controller("LoginController", LoginController);
 
-    LoginController.$inject = ["OauthFactory", "UserFactory", "$state"];
+    LoginController.$inject = ["OauthFactory", "UserFactory", "$state", "SocketFactory"];
 
-    function LoginController(OauthFactory, UserFactory, $state) {
+    function LoginController(OauthFactory, UserFactory, $state, SocketFactory) {
         var login = this;
-        var user;
 
         login.connect = connect;
 
         activate();
 
         function activate() {
-            var isLogged = JSON.parse( localStorage.getItem("map-chat.user.isLogged") );
-            if (isLogged) {
-                $state.go("home");
+            var user = JSON.parse( UserFactory.getUser() );
+            if (user && user.isLogged) {
+                return $state.go("home");
             }
-            user = UserFactory.getUser();
             OauthFactory.initialize();
         }
 
         function connect() {
+
+            // Call to oauth to connect with twitter...
             OauthFactory.connectTwitter()
                 .then(function() {
-                    OauthFactory.isReady().me().done(function(me) {
-                        if (me) {
-                            user.alias = me.alias;
-                            user.isLogged = true;
-                            user.location.id = me.id;
-                            user.location.icon = me.avatar;
-                            localStorage.setItem("map-chat.user.isLogged", JSON.stringify(user.isLogged));
-                            console.log(user);
-                            $state.go("home");
-                        }
+
+                    OauthFactory.isReady().me()
+                        .done(function(me) {
+
+                            // When done use the user factory to store the user...
+                            UserFactory.storeUser(me)
+                                .then(function() {
+                                    $state.go("home");
+                            });
+
                     });
                 })
                 .catch(function(error) {
                     console.error(error);
+                    OauthFactory.initialize();
                 });
         }
 
