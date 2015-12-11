@@ -48,6 +48,7 @@
 
             return geolocation.getLocation()
                 .then(function (data) {
+                    console.log(data);
                     user.alias = me.alias;
                     user.isLogged = true;
                     user.location.id = me.id;

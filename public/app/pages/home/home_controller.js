@@ -112,6 +112,8 @@
          */
         function logout() {
             localStorage.removeItem("map-chat.user");
+            console.log(home.user);
+            SocketFactory.emit("userLogout", home.user);
             return $state.go("login");
         }
 
